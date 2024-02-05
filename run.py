@@ -1,4 +1,4 @@
 from SkillTrackerDemo import app
 
 if __name__ == '__main__':
-    app.run.py(debug=True)
+    app.run(debug=True)
