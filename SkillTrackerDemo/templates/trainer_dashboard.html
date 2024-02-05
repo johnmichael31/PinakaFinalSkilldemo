@@ -1,0 +1,84 @@
+{% extends "layout.html" %} {% block title %}Trainer Dashboard - SkillsTracker{%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Trainer Dashboard</h1>
+  <!-- Welcome Message and Logout Button -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Welcome, {{ session['username'] }}!</h2>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+  </div>
+
+  <!-- Trainer's Actions -->
+  <div class="row">
+    <!-- Student Progress -->
+    <div class="col-lg-4 mb-3">
+      <div class="card h-100">
+        <div class="card-header">Student Progress</div>
+        <div class="card-body">
+          <p>View and manage the progress of your students.</p>
+          <a href="#" class="btn btn-primary">Manage Progress</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competency Management -->
+    <div class="col-lg-4 mb-3">
+      <div class="card h-100">
+        <div class="card-header">Competency Management</div>
+        <div class="card-body">
+          <p>View, add, or update competencies and learning outcomes.</p>
+          <a href="/competency_management" class="btn btn-primary"
+            >Manage Competencies</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Reporting -->
+    <div class="col-lg-4 mb-3">
+      <div class="card h-100">
+        <div class="card-header">Reporting</div>
+        <div class="card-body">
+          <p>
+            View graphical reports of individual or overall student progress.
+          </p>
+          <a href="#" class="btn btn-primary">View Reports</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Graphical Report Section -->
+  <div class="card my-4">
+    <div class="card-header">Overall Student Progress Report</div>
+    <div class="card-body">
+      <canvas id="progressReportChart" class="chart-container"></canvas>
+    </div>
+  </div>
+  <!-- Example of a table listing students -->
+  <div class="card mt-4">
+    <div class="card-header">Students List</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Progress</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamically generate rows here based on student data -->
+          <tr>
+            <th scope="row">1</th>
+            <td>John Doe</td>
+            <td>80%</td>
+            <td><a href="#" class="btn btn-sm btn-info">Details</a></td>
+          </tr>
+          <!-- Repeat for each student -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
