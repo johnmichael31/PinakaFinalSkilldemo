@@ -1,0 +1,20 @@
+:root {
+    /* Define a CSS variable to adjust the space for header and footer */
+    --header-footer-height: 120px; /* Adjust this value as needed */
+  }
+  /* CSS for Sticky Footer */
+  html,
+  body {
+    height: 100%;
+  }
+  #page-content {
+    flex: 1 0 auto;
+  }
+  #sticky-footer {
+    flex-shrink: none;
+  }
+  
+  /* chart */
+  .chart-container {
+    height: 200px; /* Adjust the height as needed */
+  }
