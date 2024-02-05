@@ -1,0 +1,42 @@
+<!-- learning_outcomes_modal.html -->
+<div class="modal fade" id="learningOutcomesModal-{{ competency.competency_id }}" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ competency.title }} Learning Outcomes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% if competency.learning_outcomes|length > 0 %}
+        <ul class="list-unstyled">
+          {% for outcome in competency.learning_outcomes %}
+          <li class="d-flex justify-content-between align-items-center">
+            {{ outcome.description }}
+            <div>
+              <!-- Edit button for each learning outcome -->
+              <button type="button" class="btn btn-primary btn-sm"
+                onclick="editLearningOutcome('{{ outcome.outcome_id }}', '{{ competency.competency_id }}')"
+                title="Edit">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <!-- Delete button for each learning outcome -->
+              <button type="button" class="btn btn-danger btn-sm"
+                onclick="deleteLearningOutcome('{{ outcome.outcome_id }}')" title="Delete">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No learning outcomes added yet for this competency.</p>
+        {% endif %}
+        <!-- Add button outside the loop -->
+        <button type="button" class="btn btn-success"
+          onclick="showAddLearningOutcomeModal('{{ competency.competency_id }}')" title="Add Learning Outcome">
+          <i class="bi bi-plus-lg"></i> Add Learning Outcome
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<!-- Add Competency Modal -->
+<div
+  class="modal fade"
+  id="addCompetencyModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Competency</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form id="addCompetencyForm">
+        <div class="modal-body">
+          <!-- Form fields for adding a competency -->
+          <div class="mb-3">
+            <label for="competencyTitle" class="form-label"
+              >Competency Title</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="competencyTitle"
+              name="title"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="competencyCategory" class="form-label">Category</label>
+            <select class="form-select"
+              id="competencyCategory"
+              name="category"
+              required
+            >
+              <option value="Basic">Basic</option>
+              <option value="Common">Common</option>
+              <option value="Core">Core</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="competencyDescription" class="form-label"
+              >Description</label
+            >
+            <textarea
+              class="form-control"
+              id="competencyDescription"
+              name="description"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="competencyDuration" class="form-label"
+              >Nominal Duration (hrs)</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="competencyDuration"
+              name="duration"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save Competency</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

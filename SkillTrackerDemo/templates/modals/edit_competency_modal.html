@@ -1,0 +1,40 @@
+<!-- Edit Competency Modal -->
+<div class="modal fade" id="editCompetencyModal-{{ competency.competency_id }}" tabindex="-1" aria-labelledby="editCompetencyModalLabel-{{ competency.competency_id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editCompetencyModalLabel-{{ competency.competency_id }}">Edit Competency</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{{ url_for('update_competency', competency_id=competency.competency_id) }}">
+        <div class="modal-body">
+          <!-- Form fields for editing a competency -->
+          <div class="mb-3">
+            <label for="editCompetencyTitle-{{ competency.competency_id }}" class="form-label">Competency Title</label>
+            <input type="text" class="form-control" id="editCompetencyTitle-{{ competency.competency_id }}" name="title" value="{{ competency.title }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="editCompetencyCategory-{{ competency.competency_id }}" class="form-label">Category</label>
+            <select class="form-select" id="editCompetencyCategory-{{ competency.competency_id }}" name="category" required>
+              <option value="Basic" {% if competency.category == 'Basic' %} selected {% endif %}>Basic</option>
+              <option value="Common" {% if competency.category == 'Common' %} selected {% endif %}>Common</option>
+              <option value="Core" {% if competency.category == 'Core' %} selected {% endif %}>Core</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="editCompetencyDescription-{{ competency.competency_id }}" class="form-label">Description</label>
+            <textarea class="form-control" id="editCompetencyDescription-{{ competency.competency_id }}" name="description">{{ competency.description }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="editCompetencyDuration-{{ competency.competency_id }}" class="form-label">Nominal Duration (hrs)</label>
+            <input type="number" class="form-control" id="editCompetencyDuration-{{ competency.competency_id }}" name="duration" value="{{ competency.nominal_duration_hrs }}" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update Competency</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

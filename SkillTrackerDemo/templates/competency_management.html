@@ -1,0 +1,79 @@
+{% extends "layout.html" %} {% block title %}Competency Management -
+SkillsTracker{% endblock %} {% block content %}
+<div class="container mt-4">
+  <div class="d-flex flex-row justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column">
+      <h2 class="mb-0">Welcome back, {{ session['username'] }}!</h2>
+      <h6 class="text-muted">Competency Management</h6>
+    </div>
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+  </div>
+
+  <div class="text-end mb-4">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCompetencyModal">
+      Add Competency
+    </button>
+  </div>
+
+  {% for category, competencies in [('Basic', basic_competencies), ('Common',
+  common_competencies), ('Core', core_competencies)] %}
+  <div class="my-4">
+    <h2 class="mb-3">{{ category }} Competencies</h2>
+    <div class="table-responsive">
+      {% if competencies %}
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Competency</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for competency in competencies %}
+          <tr>
+            <td>{{ competency.title }}</td>
+            <td class="text-end">
+              <button
+                type="button"
+                class="btn btn-info btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#learningOutcomesModal-{{ competency.competency_id }}"
+                title="View Learning Outcomes"
+              >
+                <i class="bi bi-list-ul"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#editCompetencyModal-{{ competency.competency_id }}"
+                title="Edit Competency"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                onclick="confirmDelete('{{ competency.competency_id }}');"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          {% include 'modals/learning_outcomes_modal.html' %} 
+          {% include 'modals/edit_competency_modal.html' %}
+          {% include 'modals/add_learning_outcome.html' %}
+          {% include 'modals/edit_competency_modal.html' %}
+          {% include 'modals/edit_learning_outcome.html' %}
+          <!-- Include the Add Competency modal outside the loop so it's not repeated -->
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No competencies added yet under {{ category }}.</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %} {% include 'modals/add_new_competencies_modal.html' %}
+</div>
+{% endblock %}
