@@ -1,0 +1,93 @@
+{% extends "layout.html" %} {% block title %}Student Dashboard - SkillsTracker{%
+    endblock %} {% block content %}
+    <div class="container mt-4">
+      <!-- Welcome Message and Logout Button -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Welcome, {{ session['username'] }}!</h2>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+      </div>
+    
+      <h1 class="mb-4">Student Dashboard</h1>
+    
+      <!-- Student's Overview -->
+      <div class="row"> 
+        <!-- Your Progress Column -->
+        <div class="col-lg-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">Your Progress</div>
+            <div class="card-body">
+              <p>Track your progress across different competencies.</p>
+              <div class="progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  aria-valuenow="{{ overall_progress_percentage }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  {{ overall_progress_percentage }}%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Your Learning Outcomes Column -->
+        <div class="col-lg-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">Your Learning Outcomes</div>
+            <div class="card-body">
+              <!-- ... other HTML code ... -->
+              <ul class="list-group">
+                {% for outcome in learning_outcomes %}
+                <li class="list-group-item">
+                  {{ outcome.description }} - Status: {{ outcome.status |
+                  default('not_started') | capitalize }}
+                </li>
+                {% else %}
+                <li class="list-group-item">No learning outcomes available</li>
+                {% endfor %}
+              </ul>
+              <!-- ... other HTML code ... -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Detailed Progress Report -->
+      <div class="card mt-4">
+        <div class="card-header">Detailed Progress Report</div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Competency</th>
+                <th scope="col">Learning Outcome</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for progress in progress_data %}
+              <tr
+                class="{{ 'table-success' if progress.status == 'completed' else 'table-warning' if progress.status == 'in_progress' else 'table-secondary' }}"
+              >
+                <td>{{ progress.competency_title }}</td>
+                <td>{{ progress.outcome_description }}</td>
+                <td>{{ progress.status | capitalize }}</td>
+                <td>{{ progress.date_completed or 'Not completed' }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center">No progress data available</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+      
+    
+    

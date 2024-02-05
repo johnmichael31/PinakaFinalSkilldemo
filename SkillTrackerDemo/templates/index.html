@@ -1,0 +1,49 @@
+{% extends "layout.html" %} {% block title %}Login - TrainersMarker{% endblock
+    %} {% block content %}
+    <!-- Flash messages here -->
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in
+    messages %}
+    <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+    
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: calc(100vh - var(--header-footer-height))"
+    >
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">
+              <!-- Login Icon - you can replace this with an actual image tag if you have a logo -->
+              <i class="bi bi-person-circle"></i> Login
+            </h2>
+            <form method="POST" action="/">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+    
+    
